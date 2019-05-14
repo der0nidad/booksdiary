@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-container fluid>
+        <v-container >
             <v-layout justify-center mb-4>
                 <v-flex xs6 lg2 md4 sm3 mr-8>
                     <v-text-field
@@ -26,8 +26,10 @@
                     </v-btn>
                 </v-flex>
             </v-layout>
+        </v-container>
+        <v-container grid-list-lg>
             <v-layout row wrap>
-                <v-flex xs12
+                <v-flex xs12 sm6 md4
                     v-if="table_view"
                 >
                     <v-data-table
@@ -53,9 +55,9 @@
                         <v-card-title primary-title>
                             <div>
                                 <h3 class="headline mb-0"></h3>
-                                <div> {{ item.name }} </div>
-                                <div> {{ item.author }}</div>
-                                <div> {{ item.description }}</div>
+                                <p> {{ item.name }} </p>
+                                <p> {{ item.author }}</p>
+                                <p> {{ item.description }}</p>
                             </div>
                         </v-card-title>
 
