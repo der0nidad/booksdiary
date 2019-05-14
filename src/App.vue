@@ -1,8 +1,6 @@
 <template>
   <v-app>
-    <v-flex >
-      <VueScrollProgress></VueScrollProgress>
-    </v-flex>
+
 
     <NavigationToolbar/>
 
@@ -15,16 +13,16 @@
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
-import BooksList from "./components/BooksList";
-import NavigationToolbar from "./components/NavigationToolbar";
+import BooksList from "@/components/BooksList";
+import NavigationToolbar from "@/components/NavigationToolbar";
+import NewBook from "@/components/NewBook";
 
 export default {
   name: 'App',
   components: {
     NavigationToolbar,
     BooksList,
-    HelloWorld
+    NewBook,
   },
   data () {
     return {
