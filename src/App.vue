@@ -6,9 +6,7 @@
 
 
 
-    <v-content>
-      <BooksList/>
-    </v-content>
+
   </v-app>
 </template>
 

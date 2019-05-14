@@ -1,28 +1,33 @@
 <template>
-    <v-toolbar app flat color="indigo">
-        <v-spacer></v-spacer>
+    <div>
+        <v-toolbar app flat color="indigo">
+            <v-spacer></v-spacer>
 
-        <!--      <v-toolbar-title>Title</v-toolbar-title>-->
-        <v-menu :nudge-width="100">
-            <template v-slot:activator="{ on }">
-                <v-toolbar-title v-on="on">
-                    <span class="bd_title pointer"> Books Diary</span>
-                    <v-icon dark>arrow_drop_down</v-icon>
-                </v-toolbar-title>
-            </template>
-            <v-list>
-                <v-list-tile
-                    v-for="(item, index) in items"
-                    :key="index"
-                    @click=""
-                >
-                    <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-                </v-list-tile>
-            </v-list>
-        </v-menu>
-        <v-spacer></v-spacer>
+            <!--      <v-toolbar-title>Title</v-toolbar-title>-->
+            <v-menu :nudge-width="100">
+                <template v-slot:activator="{ on }">
+                    <v-toolbar-title v-on="on">
+                        <span class="bd_title pointer"> Books Diary</span>
+                        <v-icon dark>arrow_drop_down</v-icon>
+                    </v-toolbar-title>
+                </template>
+                <v-list>
+                    <v-list-tile
+                            v-for="(item, index) in items"
+                            :key="index"
+                            :to="item.url"
+                    >
+                        <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+                    </v-list-tile>
+                </v-list>
+            </v-menu>
+            <v-spacer></v-spacer>
 
-    </v-toolbar>
+        </v-toolbar>
+        <v-content>
+            <router-view></router-view>
+        </v-content>
+    </div>
 </template>
 
 <script>
@@ -32,10 +37,13 @@
             return {
                 items: [
                     {
-                        title: 'Books Diary'
+                        title: 'Books Diary',
+                        url: 'books'
                     },
                     {
-                        title: 'Add new book'
+                        title: 'Add new book',
+                        url: 'new'
+
                     }
                 ]
             }
