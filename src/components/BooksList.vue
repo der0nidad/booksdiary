@@ -70,11 +70,14 @@
 </template>
 
 <script>
+    import axios from 'axios'
     export default {
         name: "BooksList",
         data () {
             return {
                 table_view: false,
+                loading: false,
+                endpoint: 'http://127.0.0.1/books',
                 headers: [
                     {
                         test: 'id',
@@ -111,6 +114,13 @@
 
                     }]
             }
+        },
+        created () {
+            axios.get(this.endpoint)
+                .then(response => {
+                    this.books = response.data
+                })
+                .catch(error => console.log(error))
         }
 
 
