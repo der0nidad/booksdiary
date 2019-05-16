@@ -12,7 +12,7 @@
                 <v-flex xs3 lg1 ml-5>
                     <v-btn fab
                         class="elevation-1"
-                       @click="table_view = !table_view"
+                       @click="table_view = true"
                     >
                     <v-icon x-large>view_list</v-icon>
                     </v-btn>
@@ -20,7 +20,7 @@
                 <v-flex xs3 lg1>
                     <v-btn fab
                         class="elevation-1"
-                       @click="table_view = !table_view"
+                       @click="table_view = false"
                     >
                     <v-icon x-large>view_module</v-icon>
                     </v-btn>
@@ -29,7 +29,7 @@
         </v-container>
         <v-container grid-list-lg>
             <v-layout row wrap>
-                <v-flex xs12 sm6 md4
+                <v-flex xs12
                     v-if="table_view"
                 >
                     <v-data-table
@@ -39,9 +39,9 @@
                     >
                         <template v-slot:items="props">
                             <td>{{ props.item.id }}</td>
-                            <td class="text-xs-right">{{ props.item.name }}</td>
-                            <td class="text-xs-right">{{ props.item.author }}</td>
-                            <td class="text-xs-right">{{ props.item.description }}</td>
+                            <td>{{ props.item.name }}</td>
+                            <td>{{ props.item.author }}</td>
+                            <td>{{ props.item.description }}</td>
                         </template>
                     </v-data-table>
                 </v-flex>
@@ -49,6 +49,7 @@
                     <v-card
                         v-for="(item, i) in books"
                         :key="i"
+                        xs12 sm6 md4
                     >
 
 
@@ -75,9 +76,9 @@
         name: "BooksList",
         data () {
             return {
-                table_view: false,
+                table_view: true,
                 loading: false,
-                endpoint: 'http://127.0.0.1/books',
+                endpoint: 'http://127.0.0.1:5000/books',
                 headers: [
                     {
                         test: 'id',
@@ -119,6 +120,7 @@
             axios.get(this.endpoint)
                 .then(response => {
                     this.books = response.data
+                    console.log(this.books)
                 })
                 .catch(error => console.log(error))
         }
