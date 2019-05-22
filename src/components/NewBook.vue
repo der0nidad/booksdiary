@@ -6,7 +6,7 @@
                     <v-card class="elevation-12">
                         <v-toolbar class="elevation-1">
                             <v-toolbar-title
-                                    class="toolbar_properties"
+                                    class="text--secondary toolbar_properties"
                             >Add new book
                             </v-toolbar-title>
 
@@ -64,6 +64,8 @@
 </template>
 
 <script>
+    import axios from 'axios'
+
     export default {
         name: "NewBook",
         data() {
@@ -71,18 +73,29 @@
                 name: '',
                 author: '',
                 description: '',
-                valid: false
+                valid: false,
+                endpoint: 'http://127.0.0.1:5000/books',
+
             }
         },
         methods: {
             onSubmit() {
                 if (this.$refs.form.validate()) {
-                    const book = {
+                    const newBook = {
                         name: this.name,
                         author: this.author,
                         description: this.description
                     }
-                    console.log(book)
+                    console.log(newBook)
+                    axios.post(this.endpoint, newBook)
+                        .then(function (response) {
+                            console.log(response);
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                    this.$router.push('/books')
+
                 }
             }
         }
