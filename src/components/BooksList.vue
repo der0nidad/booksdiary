@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-container >
+        <v-container>
             <v-layout justify-center mb-4>
                 <v-flex xs6 lg2 md4 sm3 mr-8>
                     <v-text-field
@@ -8,29 +8,29 @@
                     ></v-text-field>
 
                 </v-flex>
-<!--                <v-spacer></v-spacer>-->
+                <!--                <v-spacer></v-spacer>-->
                 <v-flex xs3 lg1 ml-5>
                     <v-btn fab
-                        class="elevation-1"
-                       @click="table_view = true"
+                           class="elevation-1"
+                           @click="table_view = true"
                     >
-                    <v-icon x-large>view_list</v-icon>
+                        <v-icon x-large>view_list</v-icon>
                     </v-btn>
                 </v-flex>
                 <v-flex xs3 lg1>
                     <v-btn fab
-                        class="elevation-1"
-                       @click="table_view = false"
+                           class="elevation-1"
+                           @click="table_view = false"
                     >
-                    <v-icon x-large>view_module</v-icon>
+                        <v-icon x-large>view_module</v-icon>
                     </v-btn>
                 </v-flex>
             </v-layout>
         </v-container>
         <v-container grid-list-lg>
             <v-layout row wrap>
-                <v-flex xs12 sm6 md4
-                    v-if="table_view"
+                <v-flex xs12
+                        v-if="table_view"
                 >
                     <v-data-table
                             :headers="headers"
@@ -47,9 +47,9 @@
                 </v-flex>
                 <v-flex v-else>
                     <v-card
-                        v-for="(item, i) in books"
-                        :key="i"
-                        xs12 sm6 md4
+                            v-for="(item, i) in books"
+                            :key="i"
+                            xs12 sm6 md4
                     >
 
 
@@ -61,7 +61,21 @@
                                 <p> {{ item.description }}</p>
                             </div>
                         </v-card-title>
-
+                        <v-card-actions>
+                            <v-btn
+                                    flat
+                                    color="primary"
+                                    :to="'/edit/'+item.id"
+                                    :book="item"
+                            >Edit
+                            </v-btn>
+                            <v-btn
+                                    flat
+                                    color="primary"
+                                    @click="deleteBook(item, $event)"
+                            >Delete
+                            </v-btn>
+                        </v-card-actions>
 
                     </v-card>
                 </v-flex>
@@ -72,11 +86,12 @@
 
 <script>
     import axios from 'axios'
+
     export default {
         name: "BooksList",
-        data () {
+        data() {
             return {
-                table_view: true,
+                table_view: false,
                 loading: false,
                 endpoint: 'http://127.0.0.1:5000/books',
                 headers: [
@@ -116,13 +131,32 @@
                     }]
             }
         },
-        created () {
+        created() {
             axios.get(this.endpoint)
                 .then(response => {
                     this.books = response.data
                     console.log(this.books)
                 })
                 .catch(error => console.log(error))
+        },
+        methods: {
+            deleteBook(item, event) {
+                console.log(this.endpoint + '/' + item.id)
+                axios.delete(this.endpoint + '/' + item.id)
+                    .then(response => {
+                        console.log('success')
+                    })
+                    .catch(error => console.log(error))
+            },
+            editBook(item, event) {
+                console.log(item)
+                item.name = 'Updated Name'
+                axios.put(this.endpoint + '/' + item.id, item)
+                    .then(response => {
+                        console.log('success')
+                    })
+                    .catch(error => console.log(error))
+            }
         }
 
 

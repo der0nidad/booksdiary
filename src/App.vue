@@ -14,6 +14,7 @@
 import BooksList from "@/components/BooksList";
 import NavigationToolbar from "@/components/NavigationToolbar";
 import NewBook from "@/components/NewBook";
+import EditBook from "@/components/EditBook";
 
 export default {
   name: 'App',
@@ -21,6 +22,7 @@ export default {
     NavigationToolbar,
     BooksList,
     NewBook,
+    EditBook
   },
   data () {
     return {

@@ -78,6 +78,7 @@
 
             }
         },
+        // props: ['bookName'],
         methods: {
             onSubmit() {
                 if (this.$refs.form.validate()) {
