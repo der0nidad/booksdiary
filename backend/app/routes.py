@@ -59,3 +59,15 @@ def book(num_id):
     elif request.method == 'DELETE':
         books_list = list(filter(lambda x: x['id'] != num_id, books_list))
         return '{}', 200
+    elif request.method == 'PUT':
+        req = json.loads(request.data, strict=False)
+        for index, book in enumerate(books_list):
+            if book['id'] == num_id:
+                updated_book = {
+                    'id': num_id,
+                    'name': req['name'],
+                    'author': req['author'],
+                    'description': req['description']
+                }
+                books_list[index] = updated_book
+        return '{}', 200
