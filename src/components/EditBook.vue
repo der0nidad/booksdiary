@@ -88,7 +88,7 @@
                         description: this.description
                     }
                     console.log(newBook)
-                    axios.put(this.endpoint + '/1', newBook)
+                    axios.put(this.endpoint + '/' + this.$attrs.id, newBook)
                         .then(function (response) {
                             console.log(response);
                         })
