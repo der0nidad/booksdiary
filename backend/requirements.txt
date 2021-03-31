@@ -28,7 +28,7 @@ Keras-Preprocessing==1.0.5
 keyring==10.6.0
 keyrings.alt==3.0
 kiwisolver==1.0.1
-lxml==3.5.0
+lxml==4.6.3
 Markdown==3.0.1
 MAT==0.6.1
 matplotlib==2.2.3
